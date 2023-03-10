@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -41,5 +42,17 @@ public class AmazonStepDefinitions {
         String expectedIcerik = "apple";
         String actualIcerik = amazonPage.aramaSonucElementi.getText();
         Assert.assertTrue(actualIcerik.contains(expectedIcerik));
+    }
+
+    @Then("amazon arama kutusuna Nutella yazip aratir")
+    public void amazonAramaKutusunaNutellaYazipAratir() {
+        amazonPage.aramaKutusu.sendKeys("nutella"+Keys.ENTER);
+    }
+
+    @And("arama sonuclarinin Nutella icerdigini test eder")
+    public void aramaSonuclarininNutellaIcerdiginiTestEder() {
+        String expected= "nutella";
+        String actual= amazonPage.aramaSonucElementi.getText();
+        Assert.assertTrue(actual.contains(expected));
     }
 }

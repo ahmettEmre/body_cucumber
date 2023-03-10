@@ -72,4 +72,17 @@ public class AmazonStepDefinitions {
     public void saniyeBekler(int bekle) {
         ReusableMethods.bekle(bekle);
     }
+
+    @Given("kullanici {string} anasayfaya gider")
+    public void kullaniciAnasayfayaGider(String url) {
+        Driver.getDriver().get(ConfigReader.getProperty(url));
+    }
+
+    @Then("{string} sayfasina gittigini test eder")
+    public void sayfasinaGittiginiTestEder(String url) {
+        String actualUrl= Driver.getDriver().getCurrentUrl();
+        String expectedUrl= ConfigReader.getProperty(url)+"/";
+        Assert.assertEquals(actualUrl,expectedUrl);
+
+    }
 }

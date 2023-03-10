@@ -9,6 +9,7 @@ import org.openqa.selenium.Keys;
 import pages.AmazonPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.ReusableMethods;
 
 public class AmazonStepDefinitions {
     AmazonPage amazonPage=new AmazonPage();
@@ -54,5 +55,21 @@ public class AmazonStepDefinitions {
         String expected= "nutella";
         String actual= amazonPage.aramaSonucElementi.getText();
         Assert.assertTrue(actual.contains(expected));
+    }
+
+    @Then("amazonda {string} icin arama yapar")
+    public void amazondaIcinAramaYapar(String arananKelime) {
+        amazonPage.aramaKutusu.sendKeys(arananKelime+Keys.ENTER);
+    }
+
+    @And("sonuclarin {string} icerdigini test eder")
+    public void sonuclarinIcerdiginiTestEder(String arananKelime) {
+        String actual=amazonPage.aramaSonucElementi.getText();
+        Assert.assertTrue(actual.contains(arananKelime));
+    }
+
+    @And("{int} saniye bekler")
+    public void saniyeBekler(int bekle) {
+        ReusableMethods.bekle(bekle);
     }
 }
